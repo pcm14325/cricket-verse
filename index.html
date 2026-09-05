@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>CRICKETVERSE | The Ultimate Cricket Experience</title>
+    <!-- Google Fonts & Font Awesome for clean icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0f1c;
+            color: #ffffff;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* glowing accent */
+        .accent-glow {
+            color: #bfff3c;
+            text-shadow: 0 0 10px rgba(191, 255, 60, 0.6);
+        }
+
+        /* header / nav */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo i {
+            color: #bfff3c;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #cbd5e0;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #bfff3c;
+        }
+
+        .btn-primary {
+            background: #bfff3c;
+            color: #0b0f1c;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            letter-spacing: -0.2px;
+            box-shadow: 0 8px 20px rgba(191, 255, 60, 0.2);
+        }
+        .btn-primary:hover {
+            background: #d4ff6e;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(191, 255, 60, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2d3748;
+            color: #ffffff;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: #bfff3c;
+            color: #bfff3c;
+        }
+
+        /* QUICK LINKS BAR - TOP PRIORITY */
+        .quick-links-bar {
+            background: #121a29;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0 2rem;
+            border: 1px solid #233046;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+        .quick-links-bar span {
+            font-weight: 700;
+            color: #bfff3c;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .quick-link {
+            background: #1a2436;
+            color: #cbd5e0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #2d3748;
+        }
+        .quick-link:hover {
+            background: #bfff3c;
+            color: #0b0f1c;
+            border-color: #bfff3c;
+            transform: translateY(-2px);
+        }
+        .quick-link i {
+            font-size: 0.8rem;
+        }
+
+        /* LINKS SECTION - MAIN FOCUS (now at top) */
+        .links-section {
+            padding: 1rem 0 3rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-subtitle {
+            color: #8b9bb4;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .link-card {
+            background: #121a29;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #233046;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            cursor: pointer;
+        }
+        .link-card:hover {
+            transform: translateY(-6px);
+            border-color: #bfff3c80;
+            background: #151f31;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .link-icon {
+            background: #bfff3c20;
+            border-radius: 16px;
+            padding: 0.8rem;
+            color: #bfff3c;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        .link-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: #ffffff;
+        }
+        .link-content p {
+            font-size: 0.85rem;
+            color: #8b9bb4;
+            margin-bottom: 0.7rem;
+            line-height: 1.4;
+        }
+        .link-url {
+            font-size: 0.8rem;
+            color: #bfff3c;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* hero area */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 0 4rem;
+            gap: 2rem;
+        }
+        .hero-content {
+            flex: 1 1 450px;
+        }
+        .hero-badge {
+            background: rgba(191, 255, 60, 0.12);
+            border: 1px solid #bfff3c40;
+            color: #bfff3c;
+            font-weight: 600;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 span {
+            color: #bfff3c;
+            display: block;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #a0aec0;
+            max-width: 550px;
+            margin-bottom: 2.5rem;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            flex: 1 1 400px;
+            background: radial-gradient(circle at 30% 30%, #1e2b3c, #0b0f1c);
+            border-radius: 40px;
+            padding: 2rem;
+            border: 1px solid #263244;
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .stadium-icon {
+            font-size: 6rem;
+            color: #bfff3c;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        .score-ticker {
+            background: #131a2a;
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid #2d3748;
+        }
+        .score-ticker .team {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+        }
+
+        /* stats section */
+        .stats-section {
+            background: #0f1522;
+            border-radius: 40px;
+            padding: 2.5rem 2rem;
+            margin: 2rem 0 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            border: 1px solid #1e2a3a;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #bfff3c;
+        }
+        .stat-label {
+            color: #8b9bb4;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        /* match cards */
+        .match-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0 4rem;
+        }
+        .match-card {
+            flex: 1 1 280px;
+            background: #121a29;
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid #233046;
+            transition: 0.25s ease;
+            backdrop-filter: blur(4px);
+        }
+        .match-card:hover {
+            transform: translateY(-8px);
+            border-color: #bfff3c60;
+            background: #151f31;
+        }
+        .match-teams {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .match-info {
+            color: #b0c4de;
+            font-weight: 500;
+            margin: 0.8rem 0 1.5rem;
+            font-size: 0.95rem;
+        }
+        .match-venue {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8b9bb4;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+        .match-card .btn-primary {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* player spotlight */
+        .player-spotlight {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background: linear-gradient(145deg, #101826, #0b0f1c);
+            border-radius: 50px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid #253042;
+            gap: 2rem;
+        }
+        .player-avatar {
+            font-size: 7rem;
+            color: #bfff3c;
+            background: #17202e;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 3px solid #bfff3c60;
+        }
+        .player-details h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+        .player-role {
+            color: #bfff3c;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: #bfff3c;
+            color: #0b0f1c;
+            border-radius: 40px;
+            padding: 3.5rem 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin: 4rem 0 3rem;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.2;
+        }
+        .cta-section p {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+        }
+        .cta-input {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .cta-input input {
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            border: none;
+            font-size: 1rem;
+            min-width: 260px;
+            font-weight: 600;
+        }
+        .btn-dark {
+            background: #0b0f1c;
+            color: #bfff3c;
+            border-radius: 60px;
+            padding: 1rem 2.5rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-dark:hover {
+            background: #1a2332;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            color: #607080;
+            border-top: 1px solid #1b2637;
+            margin-top: 2rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .footer-links a {
+            color: #8b9bb4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: #bfff3c;
+        }
+
+        /* responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .cta-section {
+                padding: 2.5rem 1.5rem;
+            }
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .quick-links-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .quick-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-baseball-ball"></i> CRICKET<span class="accent-glow">VERSE</span>
+            </div>
+            <div class="nav-links">
+                <a href="#links">Cricket Sites</a>
+                <a href="#matches">Matches</a>
+                <a href="#stats">Stats</a>
+                <a href="#news">News</a>
+            </div>
+            <a href="#" class="btn-primary"><i class="fas fa-ticket-alt"></i> Get Tickets</a>
+        </nav>
+
+        <!-- QUICK LINKS BAR - IMMEDIATELY VISIBLE AT TOP -->
+        <div class="quick-links-bar">
+            <span><i class="fas fa-bolt"></i> QUICK LINKS:</span>
+            <a href="https://www.cricbuzz.com" target="_blank" class="quick-link"><i class="fas fa-chart-line"></i> Daimond Exch</a>
+            <a href="https://www.espncricinfo.com" target="_blank" class="quick-link"><i class="fas fa-newspaper"></i> All Panel</a>
+            <a href="https://www.icc-cricket.com" target="_blank" class="quick-link"><i class="fas fa-globe"></i> Go Exchange</a>
+            <a href="https://www.bcci.tv" target="_blank" class="quick-link"><i class="fas fa-flag"></i> Fair Play</a>
+            <a href="https://www.iplt20.com" target="_blank" class="quick-link"><i class="fas fa-fire"></i> King Exchange</a>
+            <a href="https://www.dream11.com" target="_blank" class="quick-link"><i class="fas fa-fantasy-game"></i> Dream11</a>
+            <a href="https://www.wisden.com" target="_blank" class="quick-link"><i class="fas fa-book"></i> Wisden</a>
+        </div>
+
+        <!-- CRICKET LINKS SECTION - MAIN FEATURE (TOP POSITION) -->
+        <section class="links-section" id="links">
+            <h2 class="section-title"><i class="fas fa-globe accent-glow"></i> Top Cricket Websites & Links</h2>
+            <p class="section-subtitle">Sabse pehle saari important cricket websites ki links — click karo aur direct jao. Official boards, live scores, fantasy, news aur bahut kuch.</p>
+            
+            <div class="links-grid">
+                <!-- Official Cricket Boards -->
+                <a href="https://www.icc-cricket.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-globe"></i></div>
+                    <div class="link-content">
+                        <h3>ICC Cricket</h3>
+                        <p>Official International Cricket Council - rankings, events, and global cricket news.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> icc-cricket.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.bcci.tv" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-flag"></i></div>
+                    <div class="link-content">
+                        <h3>BCCI</h3>
+                        <p>Board of Control for Cricket in India - domestic & international fixtures.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> bcci.tv</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.ecb.co.uk" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-crown"></i></div>
+                    <div class="link-content">
+                        <h3>ECB</h3>
+                        <p>England & Wales Cricket Board - county cricket, The Hundred, and more.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> ecb.co.uk</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.cricket.com.au" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-kangaroo"></i></div>
+                    <div class="link-content">
+                        <h3>Cricket Australia</h3>
+                        <p>Official site for Australian cricket - Big Bash, Sheffield Shield, and national team.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> cricket.com.au</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.pcb.com.pk" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-star"></i></div>
+                    <div class="link-content">
+                        <h3>PCB</h3>
+                        <p>Pakistan Cricket Board - PSL, domestic cricket, and national team updates.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> pcb.com.pk</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.cricbuzz.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="link-content">
+                        <h3>Cricbuzz</h3>
+                        <p>Live scores, ball-by-ball commentary, news, and detailed statistics.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> cricbuzz.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.espncricinfo.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-newspaper"></i></div>
+                    <div class="link-content">
+                        <h3>ESPNcricinfo</h3>
+                        <p>Comprehensive cricket coverage - live scores, stats, articles, and records.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> espncricinfo.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.cricketworld.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="link-content">
+                        <h3>Cricket World</h3>
+                        <p>Latest cricket news, match reports, and expert analysis from around the world.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> cricketworld.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.wisden.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-book"></i></div>
+                    <div class="link-content">
+                        <h3>Wisden</h3>
+                        <p>The bible of cricket - authoritative articles, rankings, and historical data.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> wisden.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.dream11.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-fantasy-game"></i></div>
+                    <div class="link-content">
+                        <h3>Dream11</h3>
+                        <p>Play fantasy cricket, create your dream team, and win exciting prizes.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> dream11.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.cricketworldcup.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-globe-asia"></i></div>
+                    <div class="link-content">
+                        <h3>Cricket World Cup</h3>
+                        <p>Official ICC Cricket World Cup site - schedules, results, and highlights.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> cricketworldcup.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.iplt20.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-fire"></i></div>
+                    <div class="link-content">
+                        <h3>IPL T20</h3>
+                        <p>Indian Premier League - teams, players, live scores, and auction updates.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> iplt20.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.royalchallengers.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="link-content">
+                        <h3>RCB Official</h3>
+                        <p>Royal Challengers Bangalore - team news, fan zone, and match tickets.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> royalchallengers.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.chennaisuperkings.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-tshirt"></i></div>
+                    <div class="link-content">
+                        <h3>CSK Official</h3>
+                        <p>Chennai Super Kings - official merchandise, squad, and match updates.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> chennaisuperkings.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.mumbaiindians.com" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-medal"></i></div>
+                    <div class="link-content">
+                        <h3>Mumbai Indians</h3>
+                        <p>Five-time IPL champions - news, videos, and exclusive fan content.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> mumbaiindians.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://www.cricketnsw.com.au" target="_blank" class="link-card">
+                    <div class="link-icon"><i class="fas fa-map-pin"></i></div>
+                    <div class="link-content">
+                        <h3>Cricket NSW</h3>
+                        <p>New South Wales cricket - grassroots to professional level coverage.</p>
+                        <span class="link-url"><i class="fas fa-external-link-alt"></i> cricketnsw.com.au</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Hero Section (after links) -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-fire"></i> LIVE · WORLD CUP QUALIFIER</span>
+                <h1>FEEL THE <span>THUNDER</span> OF THE GAME</h1>
+                <p>Experience every six, every wicket, every roar. Your one-stop destination for all cricket updates, links, and live action.</p>
+                <div class="hero-actions">
+                    <a href="#links" class="btn-primary"><i class="fas fa-link"></i> Explore Cricket Links</a>
+                    <a href="#" class="btn-outline"><i class="fas fa-calendar-alt"></i> Fixtures</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <i class="fas fa-trophy stadium-icon"></i>
+                <div class="score-ticker">
+                    <div class="team"><span>🏏 IND</span> <strong>287/4</strong></div>
+                    <div class="team"><span>🏏 AUS</span> <strong>192/7</strong></div>
+                    <div style="margin-top: 0.8rem; font-size: 0.9rem; color: #bfff3c;">Overs 42.3 · CRR 5.73</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <div class="stats-section" id="stats">
+            <div class="stat-item">
+                <div class="stat-number">120K+</div>
+                <div class="stat-label">Fans in stadium</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2.4M</div>
+                <div class="stat-label">Global viewers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">47</div>
+                <div class="stat-label">Sixes this series</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">31</div>
+                <div class="stat-label">Wickets taken</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Cricket Websites</div>
+            </div>
+        </div>
+
+        <!-- Upcoming Matches -->
+        <h2 class="section-title" id="matches"><i class="fas fa-bolt accent-glow"></i> Upcoming Clashes</h2>
+        <div class="match-grid">
+            <div class="match-card">
+                <div class="match-teams">IND 🇮🇳 vs PAK 🇵🇰</div>
+                <div class="match-info">ODI Series · 1st ODI</div>
+                <div class="match-venue"><i class="fas fa-map-marker-alt"></i> Eden Gardens, Kolkata</div>
+                <a href="https://www.cricbuzz.com" target="_blank" class="btn-primary">Live Score</a>
+            </div>
+            <div class="match-card">
+                <div class="match-teams">AUS 🇦🇺 vs ENG 🏴</div>
+                <div class="match-info">T20 International</div>
+                <div class="match-venue"><i class="fas fa-map-marker-alt"></i> MCG, Melbourne</div>
+                <a href="https://www.espncricinfo.com" target="_blank" class="btn-primary">Live Score</a>
+            </div>
+            <div class="match-card">
+                <div class="match-teams">SA 🇿🇦 vs NZ 🇳🇿</div>
+                <div class="match-info">Test Championship</div>
+                <div class="match-venue"><i class="fas fa-map-marker-alt"></i> Newlands, Cape Town</div>
+                <a href="https://www.icc-cricket.com" target="_blank" class="btn-primary">Live Score</a>
+            </div>
+        </div>
+
+        <!-- Player Spotlight -->
+        <div class="player-spotlight">
+            <div class="player-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="player-details">
+                <span class="player-role">BATTER · #18</span>
+                <h3>VIRAT KOHLI</h3>
+                <p style="color: #cbd5e0; max-width: 400px; margin: 0.8rem 0 1.5rem;">"Chasing excellence, one cover drive at a time. The chase master is back with a bang."</p>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div><span style="font-weight: 800; color: #bfff3c;">75.2</span> avg</div>
+                    <div><span style="font-weight: 800; color: #bfff3c;">12,809</span> runs</div>
+                    <div><span style="font-weight: 800; color: #bfff3c;">50</span> centuries</div>
+                </div>
+                <a href="https://www.espncricinfo.com/cricketers/virat-kohli-253802" target="_blank" style="display: inline-block; margin-top: 1.5rem; color: #bfff3c; font-weight: 600; text-decoration: none;">
+                    View Full Profile <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div>
+                <h2>NEVER MISS A<br>MATCH AGAIN.</h2>
+                <p>Get exclusive access, presale tickets & cricket insights.</p>
+                <div class="cta-input">
+                    <input type="email" placeholder="Enter your email address">
+                    <button class="btn-dark">Subscribe</button>
+                </div>
+            </div>
+            <i class="fas fa-cricket-bat-ball" style="font-size: 5rem; opacity: 0.3;"></i>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="https://www.icc-cricket.com" target="_blank">ICC</a>
+                <a href="https://www.bcci.tv" target="_blank">BCCI</a>
+                <a href="https://www.cricbuzz.com" target="_blank">Cricbuzz</a>
+                <a href="https://www.espncricinfo.com" target="_blank">ESPNcricinfo</a>
+                <a href="https://www.iplt20.com" target="_blank">IPL</a>
+                <a href="https://www.wisden.com" target="_blank">Wisden</a>
+            </div>
+            <p>© 2025 CRICKETVERSE — All rights reserved. Crafted for fans of the gentleman's game.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://twitter.com" target="_blank" style="color: #607080; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" style="color: #607080; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank" style="color: #607080; margin: 0 10px;"><i class="fab fa-youtube"></i></a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
